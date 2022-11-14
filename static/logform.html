@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="logform.css"></link>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    function httpRequest() {
+        var value = {
+            'logvalue' : document.getElementById("forminput").value,
+        }
+        $.ajax({
+            type: "POST",
+            url: "log",
+            data: value,
+            dataType: "text",
+            success: function(resultData) {
+                document.getElementById("result").innerText = "Result: " + resultData
+            }
+        })
+    }
+    </script>
+    </head>
+    <body>
+    <div id = "mainform">
+        <form method = "POST" action = "/log">
+            <p id = "formtitle">Calculate log of value:</p>
+
+            <div class = "formgroup">
+                <input id = "forminput" name = "logvalue" type = "text" value=""/>
+            </div>
+
+            <div class = "formgroup" id = "result">
+                <p>Result: </p>
+                <p id = "result"></p>
+            </div>
+
+        <div id = "formbutton" onclick = "httpRequest()">Evaluate</div>
+        </form>
+    </div>
+    </body>
+</html>
