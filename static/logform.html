@@ -7,12 +7,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
     function httpRequest() {
+        var permission = document.getElementById("formbutton").style.type;
+        if(permission == "disabled") {
+            return false;
+        }
         var value = {
             'logvalue' : document.getElementById("forminput").value,
         }
         $.ajax({
             type: "POST",
-            url: "log",
+            url: "https://ugabugalogarithm.onrender.com/log",
             data: value,
             dataType: "text",
             success: function(resultData) {
@@ -20,6 +24,35 @@
             }
         })
     }
+    function validate() {
+        var button = document.getElementById("formbutton");
+        var input = document.getElementById("forminput");
+        var form = document.getElementById("mainform");
+        if (input.value == "") {
+            button.disabled = false;
+            input.style.color = "white"
+            return;
+        }
+        var initData = input.value.split("");
+        for(var i = 0; i < initData.length; i++) {
+            if(initData[i] != "1" && initData[i] != "2" && initData[i] != "3"
+            && initData[i] != "4" && initData[i] != "5" && initData[i] != "6"
+            && initData[i] != "7" && initData[i] != "8" && initData[i] != "9"
+            && initData[i] != "0") {
+                button.style.type = "disabled";
+                button.style.cursor = "not-allowed";
+                input.style.color = "tomato";
+                form.style.borderColor = "tomato";
+                return;
+            }
+            button.disabled = false;
+            input.style.color = "white"
+            button.style.type = "active";
+            button.style.cursor = "auto";
+            form.style.borderColor = "white";
+        }
+    }
+
     </script>
     </head>
     <body>
@@ -28,7 +61,7 @@
             <p id = "formtitle">Calculate log of value:</p>
 
             <div class = "formgroup">
-                <input id = "forminput" name = "logvalue" type = "text" value=""/>
+            <input id = "forminput" name = "logvalue" type = "text" value="" onkeyup="validate()"/>
             </div>
 
             <div class = "formgroup" id = "result">
