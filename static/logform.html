@@ -35,7 +35,7 @@
         }
         var initData = input.value.split("");
         for(var i = 0; i < initData.length; i++) {
-            if(initData[i] != "1" && initData[i] != "2" && initData[i] != "3"
+            if(initData.length > 8 || initData[i] != "1" && initData[i] != "2" && initData[i] != "3"
             && initData[i] != "4" && initData[i] != "5" && initData[i] != "6"
             && initData[i] != "7" && initData[i] != "8" && initData[i] != "9"
             && initData[i] != "0") {
